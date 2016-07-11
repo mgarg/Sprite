@@ -18,7 +18,7 @@
         />
     <item
         android:id="@+id/galleryImage"
-        android:title="Galery"
+        android:title="Gallery"
         android:onClick="gallery"/>
 
     <item

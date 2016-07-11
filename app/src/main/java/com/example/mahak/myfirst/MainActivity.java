@@ -18,8 +18,8 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setLogo(R.drawable.sprightly);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         setContentView(R.layout.activity_main);
-//        ActionBar mActionBar = getSupportActionBar();
-//        mActionBar.setDisplayOptions(ActionBar.DISPLAY_HOME_AS_UP | ActionBar.DISPLAY_SHOW_CUSTOM | ActionBar.DISPLAY_SHOW_HOME);
+
+
     }
 
     @Override
@@ -30,7 +30,9 @@ public class MainActivity extends AppCompatActivity {
         return super.onCreateOptionsMenu(menu);
     }
     public void create(View view){
-        Intent intent = new Intent(MainActivity.this, CreateNew.class);
+//        Intent intent = new Intent(MainActivity.this, CreateNew.class);
+//        startActivity(intent);
+        Intent intent = new Intent(MainActivity.this, RecycleView.class);
         startActivity(intent);
     }
 }
