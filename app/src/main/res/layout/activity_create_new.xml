@@ -56,6 +56,16 @@
                     android:layout_weight="1"
                     />
             </TableRow>
+                <Button
+                    android:id = "@+id/share"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:text="share"
+                    android:background="@color/orange"
+                    android:textColor="@color/white"
+                    android:onClick="share"
+                    />
         </TableLayout>
     </LinearLayout>
 

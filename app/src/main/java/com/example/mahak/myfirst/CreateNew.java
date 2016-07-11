@@ -2,6 +2,7 @@ package com.example.mahak.myfirst;
 
 import android.annotation.TargetApi;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,6 +26,7 @@ import android.widget.Toast;
 import com.sangcomz.fishbun.FishBun;
 import com.sangcomz.fishbun.define.Define;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -52,16 +54,30 @@ public class CreateNew extends AppCompatActivity {
         imageViews[2].setImageBitmap(BitmapFactory.decodeFile(path.get(2)));
         imageViews[3].setImageBitmap(BitmapFactory.decodeFile(path.get(3)));
 
-        //        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
-//        linearLayout.setDrawingCacheEnabled(true);
-//        linearLayout.buildDrawingCache();
-//        Bitmap b = Bitmap.createBitmap(linearLayout.getDrawingCache());
 //        saveImage(b);
 
     }
-    private void saveImage(Bitmap b){
-        File myDir = Environment.getExternalStorageDirectory();
-        myDir.mkdirs();
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
     }
+    public void share(View v){
+
+        LinearLayout linearLayout = (LinearLayout) findViewById(R.id.linearLayout);
+        linearLayout.setDrawingCacheEnabled(true);
+        linearLayout.buildDrawingCache();
+        Bitmap b = Bitmap.createBitmap(linearLayout.getDrawingCache());
+
+        Intent share = new Intent(android.content.Intent.ACTION_SEND);
+        share.setType("image/*");
+        share.putExtra(Intent.EXTRA_STREAM, getImageUri(CreateNew.this,b)); // Add image path
+        startActivity(Intent.createChooser(share, "Share image using"));
+    }
+//    private void saveImage(Bitmap b){
+//        File myDir = Environment.getExternalStorageDirectory();
+//        myDir.mkdirs();
+//    }
 }
 
